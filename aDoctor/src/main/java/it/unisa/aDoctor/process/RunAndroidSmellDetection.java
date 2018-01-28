@@ -106,6 +106,7 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(0) == '1') {
                                 if (dataTransmissionWithoutCompressionRule.isDataTransmissionWithoutCompression(classBean)) {
                                     record.add("1");
+                                    
                                 } else {
                                     record.add("0");
                                 }
@@ -186,6 +187,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(10) == '1') {
                                 if (noLowMemoryResolverRule.isNoLowMemoryResolver(classBean)) {
                                     record.add("1");
+                                    System.out.println("problem  -->> method not found to clean caches or unnecessary resources cause abnormal programm termination,Memory Efficiency and Stability.");
+                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    System.out.println("solution -->> use Activity.onLowMemory()
                                 } else {
                                     record.add("0");
                                 }
@@ -194,6 +198,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(11) == '1') {
                                 if (publicDataRule.isPublicData(classBean)) {
                                     record.add("1");
+                                    System.out.println("problem  -->> private data is publicly accessible cause scurity issue");
+                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    System.out.println("solution -->> use (Context.MODE_PRIVATE) ");
                                 } else {
                                     record.add("0");
                                 }
@@ -202,6 +209,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(12) == '1') {
                                 if (rigidAlarmManagerRule.isRigidAlarmManager(classBean)) {
                                     record.add("1");
+                                    System.out.println("problem  -->> Every AlarmManager-triggered operation wakes up the phone cause Efficiency, Energy Efficiency issue.");
+                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    System.out.println("solution -->> use AlarmManager.setInexactRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)");
                                 } else {
                                     record.add("0");
                                 }
@@ -210,6 +220,10 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(13) == '1') {
                                 if (slowLoopRule.isSlowLoop(classBean)) {
                                     record.add("1");
+                                    System.out.println("problem  -->> A slow version of a for-loop is used cause Efficiency issue.");
+                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    System.out.println("solution -->> use  for(String s : strings) { /* do something using s */ } ");
+                                    
                                 } else {
                                     record.add("0");
                                 }
@@ -218,6 +232,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(14) == '1') {
                                 if (unclosedCloseableRule.isUnclosedCloseable(classBean)) {
                                     record.add("1");
+                                    System.out.println("problem  -->> An object implementing the java.io.Closeable is not closed cause Memory Efficiency issue.");
+                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    System.out.println("solution -->> The object should be closed properly with  object_name.close(); ");
                                 } else {
                                     record.add("0");
                                 }
