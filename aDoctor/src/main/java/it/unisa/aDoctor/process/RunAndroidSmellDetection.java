@@ -80,7 +80,9 @@ public class RunAndroidSmellDetection {
                 headerCounter++;
             }
         }
-
+        
+        PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"))); 
+        
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
         FileWriter fileWriter = new FileWriter(fileName);
         try (CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat)) {
@@ -106,9 +108,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(0) == '1') {
                                 if (dataTransmissionWithoutCompressionRule.isDataTransmissionWithoutCompression(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> Data transmission without compression.This leads to higher battery consumption");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> use a data compression library like GZIP");
+                                    out.println("problem  -->> Data transmission without compression.This leads to higher battery consumption");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> use a data compression library like GZIP");
                                 } else {
                                     record.add("0");
                                 }
@@ -117,9 +119,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(1) == '1') {
                                 if (debbugableReleaseRule.isDebuggableRelease(RunAndroidSmellDetection.getAndroidManifest(project))) {
                                     record.add("1");
-                                    System.out.println("problem  -->> Security issue in the app by providing debugging access to authorized individuals");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> Change debuggable attribut to false in the Androidmanifest.xml file");
+                                    out.println("problem  -->> Security issue in the app by providing debugging access to authorized individuals");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Change debuggable attribut to false in the Androidmanifest.xml file");
                                 } else {
                                     record.add("0");
                                 }
@@ -128,9 +130,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(2) == '1') {
                                 if (durableWakeLockRule.isDurableWakeLock(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->>  wakelock not released.This leads to wastage of battery by keeping device in wakelock state");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> insert a wakelock.release() statement or use the timed wakelock acquire()");
+                                    out.println("problem  -->>  wakelock not released.This leads to wastage of battery by keeping device in wakelock state");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> insert a wakelock.release() statement or use the timed wakelock acquire()");
                                 } else {
                                     record.add("0");
                                 }
@@ -139,9 +141,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(3) == '1') {
                                 if (inefficientDataFormatAndParserRule.isInefficientDataFormatAndParser(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->>  Using Inefficient Parsers.Tree parsers and slower and consume more memory.");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> Implement stream parsers and replace the tree parsers for better perfomance");
+                                    out.println("problem  -->>  Using Inefficient Parsers.Tree parsers are slower and consume more memory.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Implement stream parsers and replace the tree parsers for better perfomance");
                                 } else {
                                     record.add("0");
                                 }
@@ -150,9 +152,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(4) == '1') {
                                 if (inefficientDataStructureRule.isInefficientDataStructure(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->>  Using inefficient data structures in this class");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> Repace instances of HashMap with SparseArray<BitMap> for efficency");
+                                    out.println("problem  -->>  Using inefficient data structures in this class");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Repace instances of HashMap with SparseArray<BitMap> for efficency");
                                 } else {
                                     record.add("0");
                                 }
@@ -201,9 +203,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(10) == '1') {
                                 if (noLowMemoryResolverRule.isNoLowMemoryResolver(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> method not found to clean caches or unnecessary resources cause abnormal programm termination,Memory Efficiency and Stability.");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> use Activity.onLowMemory()");
+                                    out.println("problem  -->> method not found to clean caches or unnecessary resources cause abnormal programm termination,Memory Efficiency and Stability.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> use Activity.onLowMemory()");
                                 } else {
                                     record.add("0");
                                 }
@@ -212,9 +214,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(11) == '1') {
                                 if (publicDataRule.isPublicData(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> private data is publicly accessible cause scurity issue");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> use (Context.MODE_PRIVATE) ");
+                                    out.println("problem  -->> private data is publicly accessible cause scurity issue");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> use (Context.MODE_PRIVATE) ");
                                 } else {
                                     record.add("0");
                                 }
@@ -223,9 +225,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(12) == '1') {
                                 if (rigidAlarmManagerRule.isRigidAlarmManager(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> Every AlarmManager-triggered operation wakes up the phone cause Efficiency, Energy Efficiency issue.");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> use AlarmManager.setInexactRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)");
+                                    out.println("problem  -->> Every AlarmManager-triggered operation wakes up the phone cause Efficiency, Energy Efficiency issue.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> use AlarmManager.setInexactRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation)");
                                 } else {
                                     record.add("0");
                                 }
@@ -234,9 +236,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(13) == '1') {
                                 if (slowLoopRule.isSlowLoop(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> A slow version of a for-loop is used cause Efficiency issue.");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> use  for(String s : strings) { /* do something using s */ } ");
+                                    out.println("problem  -->> A slow version of a for-loop is used cause Efficiency issue.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> use  for(String s : strings) { /* do something using s */ } ");
                                     
                                 } else {
                                     record.add("0");
@@ -246,9 +248,9 @@ public class RunAndroidSmellDetection {
                             if (smellsNeeded.charAt(14) == '1') {
                                 if (unclosedCloseableRule.isUnclosedCloseable(classBean)) {
                                     record.add("1");
-                                    System.out.println("problem  -->> An object implementing the java.io.Closeable is not closed cause Memory Efficiency issue.");
-                                    System.out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    System.out.println("solution -->> The object should be closed properly with  object_name.close(); ");
+                                    out.println("problem  -->> An object implementing the java.io.Closeable is not closed cause Memory Efficiency issue.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> The object should be closed properly with  object_name.close(); ");
                                 } else {
                                     record.add("0");
                                 }
@@ -261,6 +263,7 @@ public class RunAndroidSmellDetection {
         }
         System.out.println("CSV file was created successfully!");
         System.out.println("Finished at " + ft.format(new Date()));
+        out.close();
     }
 
     public static File getAndroidManifest(File dir) {
