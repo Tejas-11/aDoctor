@@ -19,6 +19,7 @@ import it.unisa.aDoctor.beans.ClassBean;
 import it.unisa.aDoctor.beans.PackageBean;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,9 +68,9 @@ public class RunAndroidSmellDetection {
         RigidAlarmManagerRule rigidAlarmManagerRule = new RigidAlarmManagerRule();
         SlowLoopRule slowLoopRule = new SlowLoopRule();
         UnclosedCloseableRule unclosedCloseableRule = new UnclosedCloseableRule();
-
+//-----place1 instantiate the rule
         String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC"};
-
+//-----place2 include in the string
         FILE_HEADER[0] = "Class";
 
         int headerCounter = 1;
@@ -80,8 +81,8 @@ public class RunAndroidSmellDetection {
                 headerCounter++;
             }
         }
-        
-        PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"))); 
+
+PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt")); 
         
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
         FileWriter fileWriter = new FileWriter(fileName);
@@ -255,6 +256,8 @@ public class RunAndroidSmellDetection {
                                     record.add("0");
                                 }
                             }
+                            
+           //-----place3 add the conditions and refactoring messages
                             csvFilePrinter.printRecord(record);
                         }
                     }
