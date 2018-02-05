@@ -61,7 +61,7 @@ public class MainUI extends javax.swing.JFrame {
         RAMCheck = new javax.swing.JCheckBox();
         SLCheck = new javax.swing.JCheckBox();
         UCCheck = new javax.swing.JCheckBox();
-
+//------place 1
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("aDoctor");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/aDoctor.png")).getImage());
@@ -179,7 +179,8 @@ public class MainUI extends javax.swing.JFrame {
         UCCheck.setSelected(true);
         UCCheck.setText("UC");
         UCCheck.setToolTipText("Unclosed Closable");
-
+//------place 2
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,6 +233,7 @@ public class MainUI extends javax.swing.JFrame {
                         .addComponent(SLCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(UCCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+//----place3
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
@@ -277,6 +279,7 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(PDCheck)
                     .addComponent(NLMRCheck))
                 .addGap(18, 18, 18)
+//-----place4
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -295,6 +298,7 @@ public class MainUI extends javax.swing.JFrame {
         viewResults.setEnabled(false);
         String inputPath = this.inputFolderField.getText();
         String outputPath = this.outputFileField.getText();
+//-----place5 change array size
         Integer[] smellTypesNeeded = new Integer[15];
         int numOfSmells = 0;
         if (DTWCCheck.isSelected()) {
@@ -387,6 +391,8 @@ public class MainUI extends javax.swing.JFrame {
         } else {
             smellTypesNeeded[14] = 0;
         }
+//-----place6        
+        
         String smellTypesString = StringUtils.join(smellTypesNeeded);
         boolean valid = true;
         if (inputPath.isEmpty()) {
@@ -495,6 +501,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox RAMCheck;
     private javax.swing.JCheckBox SLCheck;
     private javax.swing.JCheckBox UCCheck;
+//----place7
     private javax.swing.JButton inputFolderButton;
     private javax.swing.JTextField inputFolderField;
     private javax.swing.JLabel jLabel1;
