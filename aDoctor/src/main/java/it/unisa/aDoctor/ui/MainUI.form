@@ -87,6 +87,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="UCCheck" max="32767" attributes="0"/>
                   </Group>
+  <!-- place 1 -->
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -143,6 +144,7 @@
                   <Component id="NLMRCheck" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+<!-- place 2 -->
               <Component id="jScrollPane1" min="-2" pref="133" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -354,5 +356,6 @@
         <Property name="toolTipText" type="java.lang.String" value="Unclosed Closable"/>
       </Properties>
     </Component>
+<!-- place 3 -->
   </SubComponents>
 </Form>
