@@ -61,7 +61,12 @@ public class MainUI extends javax.swing.JFrame {
         RAMCheck = new javax.swing.JCheckBox();
         SLCheck = new javax.swing.JCheckBox();
         UCCheck = new javax.swing.JCheckBox();
-//------place 1
+        BDTCheck = new javax.swing.JCheckBox();
+        PDTCheck = new javax.swing.JCheckBox();
+        OPCheck  = new javax.swing.JCheckBox();
+        THIDCheck = new javax.swing.JCheckBox();
+        SCCCheck = new javax.swing.JCheckBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("aDoctor");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/aDoctor.png")).getImage());
@@ -179,6 +184,26 @@ public class MainUI extends javax.swing.JFrame {
         UCCheck.setSelected(true);
         UCCheck.setText("UC");
         UCCheck.setToolTipText("Unclosed Closable");
+        
+        BDTCheck.setSelected(true);
+        BDTCheck.setText("BDT");
+        BDTCheck.setToolTipText("Bulk Data Transfer");
+        
+        PDTCheck.setSelected(true);
+        PDTCheck.setText("PDT");
+        PDTCheck.setToolTipText("Prohibited Data Transfer");
+        
+        OPCheck.setSelected(true);
+        OPCheck.setText("OP");
+        OPCheck.setToolTipText("Overdrawn Pixel");
+        
+        THIDCheck.setSelected(true);
+        THIDCheck.setText("THID");
+        THIDCheck.setToolTipText("Tracking Hardware ID");
+        
+        SCCCheck.setSelected(true);
+        SCCCheck.setText("SCC");
+        SCCCheck.setToolTipText("Set Config Changes");
 //------place 2
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,8 +257,19 @@ public class MainUI extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(SLCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(UCCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(UCCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(BDTCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(PDTCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(OPCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(27, 27, 27)
+                            .addComponent(THIDCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(SCCCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 //----place3
+                     
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
@@ -278,8 +314,16 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(RAMCheck)
                     .addComponent(PDCheck)
                     .addComponent(NLMRCheck))
-                .addGap(18, 18, 18)
+
 //-----place4
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(THIDCheck)
+                        .addComponent(SCCCheck)
+                        .addComponent(OPCheck)
+                        .addComponent(PDTCheck)
+                        .addComponent(BDTCheck))
+                    .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,7 +343,7 @@ public class MainUI extends javax.swing.JFrame {
         String inputPath = this.inputFolderField.getText();
         String outputPath = this.outputFileField.getText();
 //-----place5 change array size
-        Integer[] smellTypesNeeded = new Integer[15];
+        Integer[] smellTypesNeeded = new Integer[20];
         int numOfSmells = 0;
         if (DTWCCheck.isSelected()) {
             smellTypesNeeded[0] = 1;
@@ -391,7 +435,37 @@ public class MainUI extends javax.swing.JFrame {
         } else {
             smellTypesNeeded[14] = 0;
         }
-//-----place6        
+//-----place6 
+        if (BDTCheck.isSelected()) {
+            smellTypesNeeded[15] = 1;
+            numOfSmells++;
+        } else {
+            smellTypesNeeded[15] = 0;
+        }
+        if (PDTCheck.isSelected()) {
+            smellTypesNeeded[16] = 1;
+            numOfSmells++;
+        } else {
+            smellTypesNeeded[16] = 0;
+        }
+        if (OPCheck.isSelected()) {
+            smellTypesNeeded[17] = 1;
+            numOfSmells++;
+        } else {
+            smellTypesNeeded[17] = 0;
+        }
+        if (THIDCheck.isSelected()) {
+            smellTypesNeeded[18] = 1;
+            numOfSmells++;
+        } else {
+            smellTypesNeeded[18] = 0;
+        }
+        if (SCCCheck.isSelected()) {
+            smellTypesNeeded[19] = 1;
+            numOfSmells++;
+        } else {
+            smellTypesNeeded[19] = 0;
+        }
         
         String smellTypesString = StringUtils.join(smellTypesNeeded);
         boolean valid = true;
@@ -502,6 +576,11 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox SLCheck;
     private javax.swing.JCheckBox UCCheck;
 //----place7
+    private javax.swing.JCheckBox BDTCheck;
+    private javax.swing.JCheckBox PDTCheck;
+    private javax.swing.JCheckBox OPCheck;
+    private javax.swing.JCheckBox THIDCheck;
+    private javax.swing.JCheckBox SCCCheck;
     private javax.swing.JButton inputFolderButton;
     private javax.swing.JTextField inputFolderField;
     private javax.swing.JLabel jLabel1;
