@@ -1,5 +1,6 @@
 package it.unisa.aDoctor.process;
 
+import it.unisa.aDoctor.smellDetectionRules.BulkDataTransferRule;
 import it.unisa.aDoctor.smellDetectionRules.DurableWakeLockRule;
 import it.unisa.aDoctor.smellDetectionRules.InefficientDataFormatAndParserRule;
 import it.unisa.aDoctor.smellDetectionRules.SlowLoopRule;
@@ -53,6 +54,7 @@ public class RunAndroidSmellDetection {
 
         FILE_HEADER = new String[StringUtils.countMatches(smellsNeeded, "1") + 1];
 
+        BulkDataTransferRule bulkDataTransferRule=new BulkDataTransferRule();
         DataTransmissionWithoutCompressionRule dataTransmissionWithoutCompressionRule = new DataTransmissionWithoutCompressionRule();
         DebuggableReleaseRule debbugableReleaseRule = new DebuggableReleaseRule();
         DurableWakeLockRule durableWakeLockRule = new DurableWakeLockRule();
@@ -69,7 +71,7 @@ public class RunAndroidSmellDetection {
         SlowLoopRule slowLoopRule = new SlowLoopRule();
         UnclosedCloseableRule unclosedCloseableRule = new UnclosedCloseableRule();
 //-----place1 instantiate the rule
-        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC"};
+        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC","BDT"};
 //-----place2 include in the string
         FILE_HEADER[0] = "Class";
 
@@ -252,6 +254,17 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
                                     out.println("problem  -->> An object implementing the java.io.Closeable is not closed cause Memory Efficiency issue.");
                                     out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
                                     out.println("solution -->> The object should be closed properly with  object_name.close(); ");
+                                } else {
+                                    record.add("0");
+                                }
+                            }
+                            
+                            if (smellsNeeded.charAt(15) == '1') {
+                                if (bulkDataTransferRule.isBulkDataTransfer(classBean)) {
+                                    record.add("1");
+                                    out.println("problem  -->> No network check was initiated");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Check network status before transfering data over it.");
                                 } else {
                                     record.add("0");
                                 }
