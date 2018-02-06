@@ -13,6 +13,11 @@ public class BulkDataTransferRule {
             if (!(pClassBean.getTextContent().contains("NetworkInfo")&&pClassBean.getTextContent().contains("ConnectivityManager"))) {
                 return true;
             }
+            if (!(pClassBean.getTextContent().contains("ConnectivityManager.TYPE_MOBILE")
+                  &&pClassBean.getTextContent().contains("ConnectivityManager.TYPE_WIFI")
+                  &&pClassBean.getTextContent().contains("TelephonyManager.NETWORK_TYPE_UMTS"))) {
+                return true;
+            }
         }
 
         return false;
