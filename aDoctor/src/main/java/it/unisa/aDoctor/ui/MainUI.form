@@ -88,6 +88,17 @@
                       <Component id="UCCheck" max="32767" attributes="0"/>
                   </Group>
   <!-- place 1 -->
+  				  <Group type="102" alignment="0" attributes="0">
+                      <Component id="BDTCheck" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="PDTCheck" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="OPCheck" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="THIDCheck" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="SCCCheck" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -145,6 +156,14 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
 <!-- place 2 -->
+			  <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="THIDCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SCCCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="OPCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PDTCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BDTCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="133" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -357,5 +376,40 @@
       </Properties>
     </Component>
 <!-- place 3 -->
+	<Component class="javax.swing.JCheckBox" name="BDTCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="BDT"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bulk Data Transfer"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="PDTCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="PDT"/>
+        <Property name="toolTipText" type="java.lang.String" value="Prohibited Data Transfer"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="OPCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="OP"/>
+        <Property name="toolTipText" type="java.lang.String" value="Overdrawn Pixel"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="THIDCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="THID"/>
+        <Property name="toolTipText" type="java.lang.String" value="Tracking Hardware ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="SCCCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="SCC"/>
+        <Property name="toolTipText" type="java.lang.String" value="Set Config Changes"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
