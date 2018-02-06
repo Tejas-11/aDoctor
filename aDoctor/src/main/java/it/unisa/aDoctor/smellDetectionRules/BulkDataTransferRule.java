@@ -10,7 +10,7 @@ public class BulkDataTransferRule {
 
         if (pClassBean.getTextContent().contains("HttpPost ")||pClassBean.getTextContent().contains("NfcAdapter ")||
             pClassBean.getTextContent().contains("NetworkFragment ")||pClassBean.getTextContent().contains("HttpURLConnection")) {
-            if (!pClassBean.getTextContent().contains("NetworkInfo")) {
+            if (!(pClassBean.getTextContent().contains("NetworkInfo")&&pClassBean.getTextContent().contains("ConnectivityManager"))) {
                 return true;
             }
         }
