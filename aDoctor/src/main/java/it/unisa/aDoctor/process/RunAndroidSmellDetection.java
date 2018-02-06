@@ -1,5 +1,6 @@
 package it.unisa.aDoctor.process;
 
+import it.unisa.aDoctor.smellDetectionRules.ProhibitedDataTransferRule;
 import it.unisa.aDoctor.smellDetectionRules.BulkDataTransferRule;
 import it.unisa.aDoctor.smellDetectionRules.DurableWakeLockRule;
 import it.unisa.aDoctor.smellDetectionRules.InefficientDataFormatAndParserRule;
@@ -70,8 +71,9 @@ public class RunAndroidSmellDetection {
         RigidAlarmManagerRule rigidAlarmManagerRule = new RigidAlarmManagerRule();
         SlowLoopRule slowLoopRule = new SlowLoopRule();
         UnclosedCloseableRule unclosedCloseableRule = new UnclosedCloseableRule();
+        ProhibitedDataTransferRule prohibitedDataTransferRule = new ProhibitedDataTransferRule();
 //-----place1 instantiate the rule
-        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC","BDT"};
+        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC","BDT","PDT"};
 //-----place2 include in the string
         FILE_HEADER[0] = "Class";
 
@@ -263,6 +265,17 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
                                 if (bulkDataTransferRule.isBulkDataTransfer(classBean)) {
                                     record.add("1");
                                     out.println("problem  -->> No network check was initiated");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Check network status before transfering data over it.");
+                                } else {
+                                    record.add("0");
+                                }
+                            }
+                            
+                            if (smellsNeeded.charAt(16) == '1') {
+                                if (prohibitedDataTransferRule.isProhibitedDataTransfer(classBean)) {
+                                    record.add("1");
+                                    out.println("problem  -->> Not chacked if background data was activated");
                                     out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
                                     out.println("solution -->> Check network status before transfering data over it.");
                                 } else {
