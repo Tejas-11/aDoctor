@@ -72,8 +72,9 @@ public class RunAndroidSmellDetection {
         SlowLoopRule slowLoopRule = new SlowLoopRule();
         UnclosedCloseableRule unclosedCloseableRule = new UnclosedCloseableRule();
         ProhibitedDataTransferRule prohibitedDataTransferRule = new ProhibitedDataTransferRule();
+        TrackingHardwareIDRule trackingHardwareIDRule = new trackingHardwareIDRule();
 //-----place1 instantiate the rule
-        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC","BDT","PDT"};
+        String[] smellsType = {"DTWC", "DR", "DW", "IDFP", "IDS", "ISQLQ", "IGS", "LIC", "LT", "MIM", "NLMR", "PD", "RAM", "SL", "UC","BDT","PDT", "", "THID", ""};
 //-----place2 include in the string
         FILE_HEADER[0] = "Class";
 
@@ -283,6 +284,16 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
                                 }
                             }
                             
+                            if (smellsNeeded.charAt(18) == '1') {
+                                if (TrackingHardwareIDRule.isTrackingHardwareID(classBean)) {
+                                    record.add("1");
+                                    out.println("problem  -->> The permission READ_PHONE_STATE is used which can be misused. Also it is neither stable nor reliable.");
+                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("solution -->> Check network status before transfering data over it.");
+                                } else {
+                                    record.add("0");
+                                }
+                            }
            //-----place3 add the conditions and refactoring messages
                             csvFilePrinter.printRecord(record);
                         }
