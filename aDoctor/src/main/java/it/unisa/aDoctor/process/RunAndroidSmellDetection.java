@@ -94,6 +94,17 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
         try (CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat)) {
             csvFilePrinter.printRecord((Object[]) FILE_HEADER);
 
+            String deb="0";
+            if (smellsNeeded.charAt(1) == '1'){
+                for (File project : experimentDirectory.listFiles()) {
+                    if(RunAndroidSmellDetection.getAndroidManifest(project)!=null){
+                        if (debbugableReleaseRule.isDebuggableRelease(RunAndroidSmellDetection.getAndroidManifest(project))) {
+                            deb="1";
+                        }
+                    }
+                }
+            }
+
             for (File project : experimentDirectory.listFiles()) {
 
                 if (!project.isHidden()) {
@@ -123,13 +134,11 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
                             }
 
                             if (smellsNeeded.charAt(1) == '1') {
-                                if (debbugableReleaseRule.isDebuggableRelease(RunAndroidSmellDetection.getAndroidManifest(project))) {
-                                    record.add("1");
+                                record.add(deb);
+                                if (deb=="1") {
                                     out.println("problem  -->> Security issue in the app by providing debugging access to authorized individuals");
-                                    out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
+                                    out.println("found at -->> This problem belongs to the project as a whole");
                                     out.println("solution -->> Change debuggable attribut to false in the Androidmanifest.xml file");
-                                } else {
-                                    record.add("0");
                                 }
                             }
 
