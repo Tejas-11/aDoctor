@@ -17,6 +17,9 @@ import it.unisa.aDoctor.smellDetectionRules.RigidAlarmManagerRule;
 import it.unisa.aDoctor.smellDetectionRules.PublicDataRule;
 import it.unisa.aDoctor.smellDetectionRules.LeakingThreadRule;
 import it.unisa.aDoctor.smellDetectionRules.UnclosedCloseableRule;
+import it.unisa.aDoctor.smellDetectionRules.BulkDataTransferRule;
+import it.unisa.aDoctor.smellDetectionRules.ProhibitedDataTransferRule;
+import it.unisa.aDoctor.smellDetectionRules.TrackingHardwareIDRule;
 import it.unisa.aDoctor.beans.ClassBean;
 import it.unisa.aDoctor.beans.PackageBean;
 import java.io.File;
@@ -298,7 +301,7 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
                                     record.add("1");
                                     out.println("problem  -->> The permission READ_PHONE_STATE is used which can be misused. Also it is neither stable nor reliable.");
                                     out.println("found at -->> " + classBean.getBelongingPackage() + "." + classBean.getName());
-                                    out.println("solution -->> Check network status before transfering data over it.");
+                                    out.println("solution -->> Use the Settings.Secure.ANDROID_ID string");
                                 } else {
                                     record.add("0");
                                 }
