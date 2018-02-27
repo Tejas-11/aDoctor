@@ -320,12 +320,10 @@ PrintWriter out = new PrintWriter(new FileWriter(args[0]+ "\\refactor.txt"));
 
     public static File getAndroidManifest(File dir) {
         File androidManifest = null;
-        List<File> files = (List<File>) FileUtils.listFiles(dir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
-        for (File file : files) {
-            if (file.getName().equals("AndroidManifest.xml")) {
-                androidManifest = file;
+            if (dir.getName().equals("AndroidManifest.xml")) {
+                androidManifest = dir;
+                System.out.println(dir.getName());
             }
-        }
         return androidManifest;
     }
 
